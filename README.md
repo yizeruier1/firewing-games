@@ -146,7 +146,9 @@ console.log(getRes<string>('abc'))
 
 + **Vue 的实现原理**
 
-简单理解下：使用 Object.defineProperty 来劫持数据，重写 get set 方法，实现数据双向绑定。创建实例时 Compiler 来编译模板，替换 dom 里的数据，并生成一个观察者(watcher)存放到 Dep 中，Observre 负责实现数据劫持，当初发数据的 set 方法，数据发生改变时，会调用 Dep 的 notify 来通知 dom 更新。
+简单理解下：使用 Object.defineProperty 来劫持数据，重写 get set 方法，实现数据双向绑定。创建实例时 Compiler 来编译模板，替换 dom 里的数据，并生成一个观察者(watcher)存放到 Dep 中，Observre 负责实现数据劫持，当初发数据的 set 方法，数据发生改变时，会调用 Dep 的 notify 来通知 dom 更新。学习的时候做了个小图，暂时待补充：
+
+![Vue 的实现原理](https://github.com/yizeruier1/firewing-games/blob/master/vue.png "Vue 的实现原理")
 
 + **Vue 父子组件交互**
 
@@ -220,4 +222,8 @@ console.log(getRes<string>('abc'))
 
 + **CSS 规范**
 
+比较常用 stylus ...  规范比较欠缺，因为之前待的小公司。
+
 ## Vue 实现 TodoList
+
+todo 我用 cli 的形式写的，您可以 [在线体验](http://www.gostephen.cn/todoList)
