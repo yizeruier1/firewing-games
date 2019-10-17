@@ -3,7 +3,6 @@
 + **JS调用堆栈**
 
 当 js 文件开始执行时，代码会以堆栈的方式来执行，栈底永远是**全局上下文**，栈顶永远是**正在执行的方法**，举个栗子：
-
 ```JavaScript
 function a(){
     // 第一次输出 a , 第二次输出 b a
@@ -17,13 +16,9 @@ function b(){
 a()
 b()
 ```
-
 分析一波：
-
 ![堆栈流程图](https://github.com/yizeruier1/firewing-games/blob/master/%E5%A0%86%E6%A0%88.png "堆栈流程图")
-
 当代码执行时遇到**异步任务**时，异步任务会被**push**到异步任务队列，等当前同步代码执行完成后，才会去执行异步任务队列，即异步任务开始入栈依次执行，又一个栗子：
-
 ```JavaScript
 setTimeout(() => {
     console.log(5)
