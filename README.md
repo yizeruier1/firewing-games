@@ -16,9 +16,12 @@ function b(){
 a()
 b()
 ```
+
 分析一波：
+
 ![堆栈流程图](https://github.com/yizeruier1/firewing-games/blob/master/%E5%A0%86%E6%A0%88.png "堆栈流程图")
 当代码执行时遇到**异步任务**时，异步任务会被**push**到异步任务队列，等当前同步代码执行完成后，才会去执行异步任务队列，即异步任务开始入栈依次执行，又一个栗子：
+
 ```JavaScript
 setTimeout(() => {
     console.log(5)
