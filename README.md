@@ -67,7 +67,7 @@ login.then(res => doSth()).catch(err => {
 })
 ```
 
-async/await 出书于ES7，其实也只是 Promise 的语法糖，这样写看起来更像同步代码。await 后面的方法必须要返回一个 Promise ，且只能是带有 async 的方法。例：
+async/await 出生于ES7，其实也只是 Promise 的语法糖，这样写看起来更像同步代码。await 后面的方法必须要返回一个 Promise ，且只能是带有 async 的方法。例：
 ```JavaScript
 // 还是假设我们要在登陆成功的方法里 做一些操作
 async function login(){
@@ -89,13 +89,135 @@ if (res) doSth()
 
 + **原型继承和原型链**
 
+原型继承
+```JavaScript
+// 方式 1、 Child 会继承 Parent 所有原型方法 和 构造函数中的属性
+function Parent(name){
+    this.name = name
+}
+Parent.prototype.sayHi = function(){
+    console.log(`Hi ${this.name}`)
+}
+
+function Child(){}
+Child.prototype = new Parent('Child')
+let child = new Child()
+console.log(child.name)
+child.sayHi()
+
+// 方式 2、原型继承原型方法、构造函数继承构造函数属性
+function Child1(name){
+    Parent.call(this, name)
+}
+Child1.prototype = Parent.prototype
+Child1.prototype.constructor = Child1
+let child1 = new Child1('Child1')
+```
+
+原型链：每一个对象都有一个 __proto__ 指针 指向它自己的原型对象，原型对象的 __proto__ 指向原型对象的原型对象，原型的终点是 Object.prototype，整个串起来就是原型链。实例会继承原型上的方法和属性。
+
 ## 其他
 + **TypeScript 高阶类型**
 
+常用的高阶类型有 接口(interface) 和 联合类型吧。Demo：
+```JavaScript
+// 比如定义一个 RESTful 的返回值
+interface res = {
+    code: number,
+    message: string,
+    data: any
+}
+
+// 联合类型
+type ns = number | string
+const code: ns = 111
+
+// 泛型
+function getRes<T>(param: ns): <T>{
+    return param + 1
+}
+console.log(getRes<string>('abc'))
+```
+
 ## 开发应用
 + **Vue 生命周期**
+
+从创建一个实例到销毁依次是：beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed，DOM 在 mounted 中渲染完成。
+
 + **Vue 的实现原理**
+
+简单理解下：使用 Object.defineProperty 来劫持数据，重写 get set 方法，实现数据双向绑定。创建实例时 Compiler 来编译模板，替换 dom 里的数据，并生成一个观察者(watcher)存放到 Dep 中，Observre 负责实现数据劫持，当初发数据的 set 方法，数据发生改变时，会调用 Dep 的 notify 来通知 dom 更新。
+
 + **Vue 父子组件交互**
+
+父组件向子组件通信：
+```JavaScript
+// 父组件
+<template>
+    <div>
+        <Child :msg="message" />
+    </div>
+</template>
+<script>
+    export default {
+        name: "Parent",
+        data: () => {
+            message: "Hello World"
+        }
+    }
+</script>
+
+// 子组件
+<template>
+    <div>
+        {{ msg }}
+    </div>
+</template>
+<script>
+    export default {
+        name: "Child",
+        props: {
+            msg: {
+                type: String,
+                default: ""
+            }
+        }
+    }
+</script>
+```
+
+子组件向父组件通信：
+```JavaScript
+// 父组件
+<template>
+    <div>
+        <Child @getMsg="deal" />
+    </div>
+</template>
+<script>
+    export default {
+        name: "Parent",
+        methods: {
+            deal(msg){
+                console.log(msg)
+            }
+        }
+    }
+</script>
+
+// 子组件
+<template>
+    <div>
+        <button @click="$emit('getMsg', 'Hello')">click to send Parent</button>
+    </div>
+</template>
+<script>
+    export default {
+        name: "Child"
+    }
+</script>
+```
+
 + **CSS 规范**
 
 ## Vue 实现 TodoList
