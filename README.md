@@ -226,4 +226,4 @@ console.log(getRes<string>('abc'))
 
 ## Vue 实现 TodoList
 
-todo 我用 cli 的形式写的，您可以 [在线体验](http://www.gostephen.cn/todoList)
+todo 我用 cli 的形式写的，您可以 [在线体验](http://www.gostephen.cn/todoList) 或者 [查看代码](https://github.com/yizeruier1/firewing-games/blob/master/todoList.vue)

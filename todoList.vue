@@ -3,7 +3,7 @@
         <h3>todoList Demo</h3>
         <ul>
             <li v-for="(item, index) in list" :key="index">
-                {{ item }}
+                {{ index + 1 }}、{{ item }}
                 <!-- 删除选中 tudo 项 -->
                 <span @click="list.splice(index, 1)">-</span>
             </li>
@@ -20,7 +20,7 @@
         data(){
             return{
                 list: ['Vue', 'React', 'Angular'],
-                todoItem: ""
+                todoItem: ''
             }
         },
         methods: {
@@ -29,7 +29,7 @@
                 // todo 输入为空 或者 已存在 则不能添加
                 if(item && !this.list.includes(item)){
                     this.list.push(this.todoItem)
-                    this.todoItem = ""
+                    this.todoItem = ''
                 }else{
                     alert('todo项已存在或为空！')
                 }
