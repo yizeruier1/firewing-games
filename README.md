@@ -42,11 +42,11 @@ console.log(3)
 // 依次输出 1 2 3 4 5，
 ```
 
-因为定时器和 Promise 属于异步任务所以会被先 push 到异步任务队列，同步代码依次执行，Promise 的构造函数输出 1 然后方法 a 输出 2 然后输出 3，当执行异步队列时，微任务(Promise)会先于宏任务(setTimeout)执行，所以先输出 4 再输出 5
+因为定时器和 Promise 属于异步任务所以会被先 push 到异步任务队列，同步代码依次执行，Promise 的 executor 输出 1 然后方法 a 输出 2 然后输出 3，当执行异步队列时，微任务(Promise)会先于宏任务(setTimeout)执行，所以先输出 4 再输出 5
 
 + **Promise (async/await)**
 
-Promise 出生于ES6，主要为了解决**回调地狱**问题。Promise 有三种状态，分别是：pending、resloved、rejected，且只能由 pengding 变为 resloved 或者 rejected。then 方法的返回值也是 Promise。应用举例：
+Promise 出生于ES6，主要为了解决**回调地狱**问题。Promise 有三种状态，分别是：pending、resolved、rejected，且只能由 pending 变为 resolved 或者 rejected。then 方法的返回值也是 Promise。应用举例：
 ```JavaScript
 // 假设我们要在登陆成功的方法里 做一些操作
 function login(){
@@ -114,7 +114,7 @@ Child1.prototype.constructor = Child1
 let child1 = new Child1('Child1')
 ```
 
-原型链：每一个对象都有一个 __proto__ 指针 指向它自己的原型对象，原型对象的 __proto__ 指向原型对象的原型对象，原型的终点是 Object.prototype，整个串起来就是原型链。实例会继承原型上的方法和属性。
+原型链：每一个对象都有一个 \_\_proto\_\_ 指针 指向它自己的原型对象，原型对象的 \_\_proto\_\_ 指向原型对象的原型对象，原型的终点是 Object.prototype，整个串起来就是原型链。实例会继承原型上的方法和属性。
 
 ## 其他
 + **TypeScript 高阶类型**
